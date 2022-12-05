@@ -1,0 +1,12 @@
+<div class="consent-container">
+  <div class="inner-consent-container" *ngIf="!consented" [@opacityAnim]>
+    <div class="consent-banner">
+      <p>{{ consentMessage }}</p>
+      <button (click)="triggerModal()">{{ buttonMessage }}</button>
+    </div>
+  </div>
+
+  <div *ngIf="consented">
+    <ng-content></ng-content>
+  </div>
+</div>

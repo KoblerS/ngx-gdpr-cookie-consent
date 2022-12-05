@@ -1,0 +1,9 @@
+<cookie-consent [config]="config"></cookie-consent>
+
+<div style="max-width: 800px">
+  <cookie-container cookieId="external" [waitForScripts]="true">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </cookie-container>
+</div>
+
+<button (click)="cookie.showModal()" style="margin-top: 40px">Show Cookie Container</button>

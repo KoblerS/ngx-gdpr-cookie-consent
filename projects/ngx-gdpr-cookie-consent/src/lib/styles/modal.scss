@@ -1,0 +1,25 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 1000;
+
+  .modal-popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    margin: 10px;
+    width: auto;
+    max-width: calc(100% - 80px);
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 10001;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,37 @@
+button {
+  height: 45px;
+  border-radius: 4px;
+  background: #28a745;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding-left: 1em;
+  padding-right: 1em;
+  cursor: pointer;
+
+  &:hover {
+    background: #30c553;
+    border-radius: 4px;
+    color: #fff;
+  }
+}
+
+.secondary-button {
+  background: #222222;
+  border-radius: 4px;
+  color: #fff;
+
+  &:hover {
+    background: #2e2e2e;
+    border-radius: 4px;
+    color: #fff;
+  }
+}
+
+.button-full-width {
+  width: 100%;
+}
+
+.button-sm {
+  height: 38px;
+}
