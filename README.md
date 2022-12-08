@@ -2,8 +2,6 @@
 # ngx-gdpr-cookie-consent
 
 [![npm version](https://badge.fury.io/js/ngx-gdpr-cookie-consent.svg)](https://badge.fury.io/js/ngx-gdpr-cookie-consent)
-[![Build Status](https://travis-ci.org/SDK-Industries/ngx-gdpr-cookie-consent.svg?branch=master)](https://travis-ci.org/tinesoft/ngx-gdpr-cookie-consent)
-[![Coverage Status](https://coveralls.io/repos/github/SDK-Industries/ngx-gdpr-cookie-consent/badge.svg?branch=master)](https://coveralls.io/github/SDK-Industries/ngx-gdpr-cookie-consent?branch=master)
 
 ## Demo
 
