@@ -1,8 +1,18 @@
 <cookie-consent [config]="config"></cookie-consent>
 
 <div style="max-width: 800px">
+  <cookie-container cookieId="external">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </cookie-container>
+</div>
+
+<div style="max-width: 800px; margin-top: 50px">
   <cookie-container cookieId="external" [waitForScripts]="true">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div *ngIf="this._service.hasConsent('external')">
+      <google-map disableDefaultUI=true, width="100%" [height]="'100%'" #map></google-map>
+    </div>
   </cookie-container>
 </div>
 

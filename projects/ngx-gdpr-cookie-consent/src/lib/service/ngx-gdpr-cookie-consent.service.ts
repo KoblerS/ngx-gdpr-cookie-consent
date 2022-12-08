@@ -7,7 +7,9 @@ import { NgxGdprCookieConsentProviderConfig } from "./ngx-provider-config";
 /**
  * Service to interact with Cookie Consent API.
  */
-@Injectable()
+@Injectable({
+  providedIn: 'platform'
+})
 export class NgxGdprCookieConsentService {
 
   private cookieSelection: CookieSelection[] = [];
@@ -39,20 +41,27 @@ export class NgxGdprCookieConsentService {
 
   private loadScripts() {
     Promise.all(
-      this.cookieSelection.map(selection => selection.type?.scripts).flat(1).filter(script => script != null).map(scriptUrl => {
-      if (scriptUrl && !this.isMyScriptLoaded(scriptUrl)) {        
+      this.cookieSelection.filter(cookie => cookie.value == true).map(selection => selection.type?.scripts).flat(1).filter(script => script != null).map(scriptUrl => {
+      if (scriptUrl && !this.isMyScriptLoaded(scriptUrl.url)) {        
         let script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = scriptUrl;
-        document.getElementsByTagName('head')[0].appendChild(script);
+        script.src = scriptUrl.url;
+        if (scriptUrl.defer) {
+          script.defer = true;
+        }
+        if (scriptUrl.async) {
+          script.async = true;
+        }
+        document.head.appendChild(script);
         return new Promise((resolve, reject) => {
-          script.onload = resolve;
-          script.onabort = reject;
+          script.onload = () => {
+            resolve(true);
+          };
         });
       }
       return Promise.resolve();
     })
-    ).finally(() => {
+    ).then(() => {
       this.scriptsLoaded.next();
     });
   }

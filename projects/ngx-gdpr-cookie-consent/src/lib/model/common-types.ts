@@ -47,7 +47,24 @@ export interface CookieType {
   /**
    * An array holding scripts that should be imported once confirmed
    */
-  scripts?: string[];
+  scripts?: LibraryScript[];
+}
+
+export interface LibraryScript {
+  /**
+   * URL of the library
+   */
+  url: string;
+
+  /**
+   * Defer load the library
+   */
+  defer?: boolean;
+
+  /**
+   * Load library asynchronosly
+   */
+  async?: boolean;
 }
 
 export interface NgxGdprCookieConsentConfig {

@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 import { NgxGdprCookieConsentService } from '../../service';
 
@@ -34,13 +35,20 @@ export class NgxGdprCookieContainerComponent implements OnInit {
   @Input()
   waitForScripts: Boolean = false;
 
+  @Input()
+  html?: string;
+
+  protected innerHTML: any = null;
+
+  protected showLoader = true;
   protected consented = false;
 
-  constructor(private _service: NgxGdprCookieConsentService) { }
+  constructor(private _service: NgxGdprCookieConsentService,
+    private _sanitizer: DomSanitizer) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     if (this.waitForScripts) {
-      
+      this.showLoader = true;
       this._service.scriptsLoaded.pipe(
         take(1)
       ).subscribe(() => {        
@@ -48,12 +56,20 @@ export class NgxGdprCookieContainerComponent implements OnInit {
         this._service.selectionState.subscribe(state => {
           this.consented = this._service.hasConsent(this.cookieId);
         });
+        if (this.html) {
+          this.innerHTML = this._sanitizer.bypassSecurityTrustHtml(this.html);
+        }
+        this.showLoader = false;
       });
     } else {
       this.consented = this._service.hasConsent(this.cookieId);
       this._service.selectionState.subscribe(state => {
         this.consented = this._service.hasConsent(this.cookieId);
       });
+      if (this.html) {
+        this.innerHTML = this._sanitizer.bypassSecurityTrustHtml(this.html);
+      }
+      this.showLoader = false;
     }
   }
 

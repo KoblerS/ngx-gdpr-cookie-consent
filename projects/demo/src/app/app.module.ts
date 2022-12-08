@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxGdprCookieConsentModule } from 'projects/ngx-gdpr-cookie-consent/src/public-api';
 
+import { GoogleMapsModule } from '@angular/google-maps';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,6 +14,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    GoogleMapsModule,
     NgxGdprCookieConsentModule.forRoot({
       cookieTypes: [
         {
@@ -26,7 +29,11 @@ import { AppComponent } from './app.component';
           name: 'External Services',
           description: 'External services help us to delivery customer experience',
           scripts: [
-            'https://maps.googleapis.com/maps/api/js?libraries=places&key=myapp'
+            {
+              url: 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDCx2bnMUpNsj3WxesM-n3dZeTD4EZFX5A',
+              defer: true,
+              async: true
+            }
           ]
         }
       ]
