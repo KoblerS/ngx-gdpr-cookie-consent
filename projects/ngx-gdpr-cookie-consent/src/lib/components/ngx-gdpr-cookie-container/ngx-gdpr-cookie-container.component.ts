@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { NgxGdprCookieConsentService } from '../../service';
 
@@ -34,25 +34,37 @@ export class NgxGdprCookieContainerComponent implements OnInit {
   @Input()
   waitForScripts: Boolean = false;
 
+  @Output()
+  didLoaded: EventEmitter<void> = new EventEmitter<void>(undefined);
+
   protected consented = false;
 
   constructor(private _service: NgxGdprCookieConsentService) { }
 
   ngOnInit(): void {
     if (this.waitForScripts) {
-      
       this._service.scriptsLoaded.pipe(
         take(1)
       ).subscribe(() => {        
         this.consented = this._service.hasConsent(this.cookieId);
         this._service.selectionState.subscribe(state => {
           this.consented = this._service.hasConsent(this.cookieId);
+          if (this.consented) {
+            setTimeout(() => {
+              this.didLoaded.emit();
+            }, 300);
+          }
         });
       });
     } else {
       this.consented = this._service.hasConsent(this.cookieId);
       this._service.selectionState.subscribe(state => {
         this.consented = this._service.hasConsent(this.cookieId);
+        if (this.consented) {
+          setTimeout(() => {
+            this.didLoaded.emit();
+          }, 300);
+        }
       });
     }
   }
