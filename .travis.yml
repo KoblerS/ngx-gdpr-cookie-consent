@@ -1,0 +1,15 @@
+dist: focal
+language: node_js
+node_js:
+- 18
+script:
+- npm run build-ci
+before_deploy:  
+- cd dist/ngx-gdpr-cookie-consent
+deploy:
+  provider: npm
+  email: "simon@kobler.me"
+  api_key: "$DEPLOY_TOKEN"
+  on:
+    tags: true
+    repo: koblers/ngx-gdpr-cookie-consent

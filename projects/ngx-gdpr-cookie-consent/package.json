@@ -1,11 +1,32 @@
 {
   "name": "ngx-gdpr-cookie-consent",
+  "author": {
+    "name": "Simon Kobler",
+    "email": "simon@kobler.me"
+  },
   "version": "0.1.7",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0",
     "purecss": "^3.0.0",
     "ngx-cookie-service": "14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koblers/ngx-gdpr-cookie-consent"
+  },
+  "keywords": [
+    "cookie",
+    "consent",
+    "angular",
+    "gdpr"
+  ],
+  "homepage": "https://github.com/koblers/ngx-gdpr-cookie-consent#readme",
+  "bugs": {
+    "url": "https://github.com/koblers/ngx-gdpr-cookie-consent/issues"
   },
   "dependencies": {
     "tslib": "^2.3.0"
