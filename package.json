@@ -1,6 +1,6 @@
 {
   "name": "ngx-gdpr-cookie-consent",
-  "version": "0.2.0",
+  "version": "0.1.7",
   "scripts": {
     "start": "ng serve",
     "build-ci": "ng build ngx-gdpr-cookie-consent --configuration production"
