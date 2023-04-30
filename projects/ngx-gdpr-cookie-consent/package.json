@@ -6,8 +6,8 @@
   },
   "version": "0.1.7",
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/common": "^13.0.0 | ^14.0.0 | ^15.0.0",
+    "@angular/core": "^13.0.0 | ^14.0.0 | ^15.0.0",
     "purecss": "^3.0.0",
     "ngx-cookie-service": "14.0.0"
   },
