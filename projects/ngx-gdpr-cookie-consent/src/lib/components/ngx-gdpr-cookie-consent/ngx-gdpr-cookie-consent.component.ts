@@ -52,6 +52,7 @@ export class NgxGdprCookieConsentComponent implements OnInit {
     confirmButtonText: 'Save',
     legalLinks: [],
     title: 'We love Cookies!',
+    expiration: 365,
     subtitle: 'We use cookies on our website. Some of them are essential, while others help us to improve this website and your experience.',
     individualPrivacySettingsButtonText: 'Inidividual privacy settings',
     individualPrivacySettingsSubtitle: 'Here you will find an overview of all cookies used. You can give your consent to entire categories or display further information and thus select only certain cookies.'
@@ -141,10 +142,10 @@ export class NgxGdprCookieConsentComponent implements OnInit {
       key,
       value: this.group.get(key)?.value ?? false
     }) as CookieSelection)
-    const selection = btoa(JSON.stringify(groupValue));
+    const selection = window.btoa(JSON.stringify(groupValue));
 
     this._service.updateSelection(groupValue);
-    this._cookie.set('cookieSelection', selection);
+    this._cookie.set('cookieSelection', selection, this.config.expiration ?? this.defaultValues.expiration);
     this.isModalHiding = true;
     setTimeout(() => {
       this.isModalShown = false;

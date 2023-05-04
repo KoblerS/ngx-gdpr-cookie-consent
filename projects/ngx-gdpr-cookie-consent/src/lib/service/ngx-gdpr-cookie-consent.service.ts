@@ -25,7 +25,7 @@ export class NgxGdprCookieConsentService {
 
   private loadCookieValue() {
     try {
-      const cookies = JSON.parse(atob(this._cookie.get('cookieSelection'))) as CookieSelection[];
+      const cookies = JSON.parse(window.atob(this._cookie.get('cookieSelection'))) as CookieSelection[];
       this.initSelection(cookies);
     } catch (e) { }
   }

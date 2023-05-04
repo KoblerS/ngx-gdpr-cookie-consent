@@ -4,7 +4,7 @@
     "name": "Simon Kobler",
     "email": "simon@kobler.me"
   },
-  "version": "0.1.94",
+  "version": "0.1.95",
   "peerDependencies": {
     "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0",
     "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0",

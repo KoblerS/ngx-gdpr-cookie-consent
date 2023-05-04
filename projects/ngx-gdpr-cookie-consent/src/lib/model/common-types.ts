@@ -93,6 +93,11 @@ export interface NgxGdprCookieConsentConfig {
    */
   confirmAllButtonText?: string;
 
+   /**
+   * This is the number of days or date when the cookie banner should be displayed again
+   */
+   expiration?: number | Date;
+
   /**
    * This is the text of the button containing the individual privacy settings message
    */
