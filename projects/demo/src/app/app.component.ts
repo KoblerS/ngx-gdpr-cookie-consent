@@ -32,9 +32,6 @@ export class AppComponent {
 
   html = '<google-map disableDefaultUI="true" width="100%" height="100%" #map></google-map>';
 
-  @ViewChild(NgxGdprCookieConsentComponent)
-  public cookie!: NgxGdprCookieConsentComponent;
-
   isTrue() {
     return false;
   }

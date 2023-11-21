@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { BehaviorSubject } from "rxjs";
 import { CookieSelection, CookieType } from "../model/common-types";
@@ -14,6 +14,7 @@ export class NgxGdprCookieConsentService {
 
   private cookieSelection: CookieSelection[] = [];
   public selectionState: BehaviorSubject<CookieSelection[]> = new BehaviorSubject<CookieSelection[]>([]);
+  public shouldOpenModal: EventEmitter<void> = new EventEmitter();
 
   public triggerModal: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
   public scriptsLoaded: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
@@ -64,6 +65,10 @@ export class NgxGdprCookieConsentService {
     ).then(() => {
       this.scriptsLoaded.next();
     });
+  }
+
+  public showModal() {
+    this.shouldOpenModal.emit();
   }
 
   public updateSelection(selection: CookieSelection[]) {    

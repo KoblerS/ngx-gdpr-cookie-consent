@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxGdprCookieConsentModule } from 'projects/ngx-gdpr-cookie-consent/src/public-api';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppComponent } from './app.component';
+import { NgxGdprCookieConsentModule } from 'ngx-gdpr-cookie-consent';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,3 @@
-@import 'purecss/build/pure-min.css';
 @import '../../styles/modal.scss';
 @import '../../styles/button.scss';
 @import '../../styles/switch.scss';
@@ -81,7 +80,7 @@ p {
   }
 
   img {
-    max-width: 70%;
+    max-width: 80px;
     text-align: center;
   }
 

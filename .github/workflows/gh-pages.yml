@@ -27,9 +27,8 @@ jobs:
       run: npm run build:demo
 
     - name: Deploy
-      if: success()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: dist/demo
-        enable_jekyll: true
+        enable_jekyll: false

@@ -69,6 +69,8 @@ export class NgxGdprCookieConsentComponent implements OnInit {
     this._service.triggerModal.pipe(skip(1)).subscribe(() => {
       this.showModal();
     });
+
+    this._service.shouldOpenModal.subscribe(() => this.showModal());
   }
 
   ngOnInit() {
