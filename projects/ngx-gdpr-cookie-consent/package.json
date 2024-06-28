@@ -4,11 +4,11 @@
     "name": "Simon Kobler",
     "email": "simon@kobler.me"
   },
-  "version": "17.0.0",
+  "version": "18.0.0",
   "peerDependencies": {
-    "@angular/common": "^15.0.0 || ^16.0.0 || ^17.0.0",
-    "@angular/core": "^15.0.0 || ^16.0.0 || ^17.0.0",
-    "ngx-cookie-service": "^15.0.0 || ^16.0.0 || ^17.0.0" 
+    "@angular/common": "^17.0.0 || ^18.0.0",
+    "@angular/core": "^17.0.0 || ^18.0.0",
+    "ngx-cookie-service": "^17.0.0 || ^18.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -28,6 +28,6 @@
     "url": "https://github.com/koblers/ngx-gdpr-cookie-consent/issues"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.6.0"
   }
 }
