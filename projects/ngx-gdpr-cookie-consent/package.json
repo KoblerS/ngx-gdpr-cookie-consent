@@ -4,11 +4,11 @@
     "name": "Simon Kobler",
     "email": "simon@kobler.me"
   },
-  "version": "18.0.0",
+  "version": "19.0.0",
   "peerDependencies": {
-    "@angular/common": "^17.0.0 || ^18.0.0",
-    "@angular/core": "^17.0.0 || ^18.0.0",
-    "ngx-cookie-service": "^17.0.0 || ^18.0.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0 ",
+    "ngx-cookie-service": "^19.0.0"
   },
   "publishConfig": {
     "access": "public"

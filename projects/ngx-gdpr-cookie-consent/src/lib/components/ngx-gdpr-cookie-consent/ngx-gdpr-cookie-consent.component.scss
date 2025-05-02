@@ -1,11 +1,12 @@
-@import '../../styles/modal.scss';
-@import '../../styles/button.scss';
-@import '../../styles/switch.scss';
-@import '../../styles/checkbox.scss';
-@import '../../styles/util.scss';
+@use "../../styles/modal.scss";
+@use "../../styles/button.scss";
+@use "../../styles/switch.scss";
+@use "../../styles/checkbox.scss";
+@use "../../styles/util.scss";
 
 * {
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    "Helvetica Neue", sans-serif !important;
 }
 
 .cookie-type {
@@ -44,7 +45,7 @@ p {
 
 .legal-statements {
   color: #aaa;
-  font-size: .80em;
+  font-size: 0.8em;
   float: right;
 
   div {
@@ -102,7 +103,7 @@ p {
 }
 
 .individual-settings-button {
-  font-size: .80em;
+  font-size: 0.8em;
   cursor: pointer;
   color: #30c553;
 
