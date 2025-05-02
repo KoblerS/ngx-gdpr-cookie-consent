@@ -4,9 +4,10 @@ import { NgxGdprCookieConsentConfig } from 'projects/ngx-gdpr-cookie-consent/src
 import { NgxGdprCookieConsentComponent } from 'projects/ngx-gdpr-cookie-consent/src/public-api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent {
 

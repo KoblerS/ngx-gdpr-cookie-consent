@@ -8,30 +8,31 @@ import { NgxGdprCookieConsentService } from '../../service';
 import { NgxGdprCookieConsentProviderConfig } from '../../service/ngx-provider-config';
 
 @Component({
-  selector: 'cookie-consent',
-  templateUrl: './ngx-gdpr-cookie-consent.component.html',
-  styleUrls: ['./ngx-gdpr-cookie-consent.component.scss'],
-  animations: [
-    trigger('opacityAnim', [
-      state('in', style({ opacity: 1 })),
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(500)
-      ]),
-      transition('* => void', [
-        animate(500, style({ opacity: 0 }))
-      ])
-    ]),
-    trigger('fadeAnim', [
-      transition(':enter', [
-        style({ top: '50%' }),
-        animate(300)
-      ]),
-      transition(':leave', [
-        animate(300, style({ top: '150%' }))
-      ])
-    ])
-  ]
+    selector: 'cookie-consent',
+    templateUrl: './ngx-gdpr-cookie-consent.component.html',
+    styleUrls: ['./ngx-gdpr-cookie-consent.component.scss'],
+    animations: [
+        trigger('opacityAnim', [
+            state('in', style({ opacity: 1 })),
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate(500)
+            ]),
+            transition('* => void', [
+                animate(500, style({ opacity: 0 }))
+            ])
+        ]),
+        trigger('fadeAnim', [
+            transition(':enter', [
+                style({ top: '50%' }),
+                animate(300)
+            ]),
+            transition(':leave', [
+                animate(300, style({ top: '150%' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class NgxGdprCookieConsentComponent implements OnInit {
 

@@ -5,21 +5,22 @@ import { take } from 'rxjs/operators';
 import { NgxGdprCookieConsentService } from '../../service';
 
 @Component({
-  selector: 'cookie-container',
-  templateUrl: './ngx-gdpr-cookie-container.component.html',
-  styleUrls: ['./ngx-gdpr-cookie-container.component.scss'],
-  animations: [
-    trigger('opacityAnim', [
-      state('in', style({ opacity: 1 })),
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(500)
-      ]),
-      transition('* => void', [
-        animate(500, style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    selector: 'cookie-container',
+    templateUrl: './ngx-gdpr-cookie-container.component.html',
+    styleUrls: ['./ngx-gdpr-cookie-container.component.scss'],
+    animations: [
+        trigger('opacityAnim', [
+            state('in', style({ opacity: 1 })),
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate(500)
+            ]),
+            transition('* => void', [
+                animate(500, style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class NgxGdprCookieContainerComponent implements OnInit {
 
