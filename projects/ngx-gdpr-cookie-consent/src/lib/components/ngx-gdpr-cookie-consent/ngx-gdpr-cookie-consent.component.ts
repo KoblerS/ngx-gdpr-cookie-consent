@@ -1,40 +1,45 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { skip } from "rxjs/operators";
 import { CookieSelection, CookieType, NgxGdprCookieConsentConfig } from '../../model/common-types';
 import { NgxGdprCookieConsentService } from '../../service';
 import { NgxGdprCookieConsentProviderConfig } from '../../service/ngx-provider-config';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'cookie-consent',
-    templateUrl: './ngx-gdpr-cookie-consent.component.html',
-    styleUrls: ['./ngx-gdpr-cookie-consent.component.scss'],
-    animations: [
-        trigger('opacityAnim', [
-            state('in', style({ opacity: 1 })),
-            transition('void => *', [
-                style({ opacity: 0 }),
-                animate(500)
-            ]),
-            transition('* => void', [
-                animate(500, style({ opacity: 0 }))
-            ])
-        ]),
-        trigger('fadeAnim', [
-            transition(':enter', [
-                style({ top: '50%' }),
-                animate(300)
-            ]),
-            transition(':leave', [
-                animate(300, style({ top: '150%' }))
-            ])
-        ])
-    ],
-    standalone: false
+  selector: 'cookie-consent',
+  templateUrl: './ngx-gdpr-cookie-consent.component.html',
+  styleUrls: ['./ngx-gdpr-cookie-consent.component.scss'],
+  animations: [
+    trigger('opacityAnim', [
+      state('in', style({ opacity: 1 })),
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(500)
+      ]),
+      transition('* => void', [
+        animate(500, style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('fadeAnim', [
+      transition(':enter', [
+        style({ top: '50%' }),
+        animate(300)
+      ]),
+      transition(':leave', [
+        animate(300, style({ top: '150%' }))
+      ])
+    ])
+  ],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ]
 })
-export class NgxGdprCookieConsentComponent implements OnInit {
+export class NgxGdprCookieConsent implements OnInit {
 
   isModalShown = false;
   isModalHiding = true;

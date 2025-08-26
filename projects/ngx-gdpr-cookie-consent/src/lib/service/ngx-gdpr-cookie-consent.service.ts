@@ -43,27 +43,37 @@ export class NgxGdprCookieConsentService {
   private loadScripts() {
     Promise.all(
       this.cookieSelection.filter(cookie => cookie.value == true).map(selection => selection.type?.scripts).flat(1).filter(script => script != null).map(scriptUrl => {
-      if (scriptUrl && !this.isMyScriptLoaded(scriptUrl.url)) {        
-        let script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = scriptUrl.url;
-        if (scriptUrl.defer) {
-          script.defer = true;
+        if (scriptUrl) {
+          // Load external script by URL
+          if (scriptUrl.url && !this.isMyScriptLoaded(scriptUrl.url)) {
+            let script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = scriptUrl.url;
+            if (scriptUrl.defer) {
+              script.defer = true;
+            }
+            if (scriptUrl.async) {
+              script.async = true;
+            }
+            document.head.appendChild(script);
+            return new Promise((resolve) => {
+              script.onload = () => resolve(true);
+            });
+          } else if (scriptUrl.code) {
+            let script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.text = scriptUrl.code;
+            document.head.appendChild(script);
+            return Promise.resolve(true);
+          } else {
+            throw new Error('Script URL or code is missing');
+          }
         }
-        if (scriptUrl.async) {
-          script.async = true;
-        }
-        document.head.appendChild(script);
-        return new Promise((resolve, reject) => {
-          script.onload = () => {
-            resolve(true);
-          };
-        });
-      }
-      return Promise.resolve();
-    })
+        return Promise.resolve();
+      })
     ).then(() => {
       this.scriptsLoaded.next();
+      console.log('All scripts loaded');
     });
   }
 
@@ -71,7 +81,7 @@ export class NgxGdprCookieConsentService {
     this.shouldOpenModal.emit();
   }
 
-  public updateSelection(selection: CookieSelection[]) {    
+  public updateSelection(selection: CookieSelection[]) {
     this.initSelection(selection)
   }
 
@@ -94,8 +104,8 @@ export class NgxGdprCookieConsentService {
   private isMyScriptLoaded(url: string) {
     var scripts = document.getElementsByTagName('script');
     for (var i = scripts.length; i--;) {
-        if (scripts[i].src == url) return true;
+      if (scripts[i].src == url) return true;
     }
     return false;
-}
+  }
 }

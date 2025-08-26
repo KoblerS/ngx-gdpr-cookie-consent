@@ -15,58 +15,111 @@ Install `Ngx Cookie Consent` dependency:
 npm install --save ngx-gdpr-cookie-consent
 ```
 
-## Usage
+## Angular 18+ (Standalone Components)
 
-1. Import the `NgxGdprCookieConsentModule` and define all cookie types:
-
-Finally, you can use ngx-gdpr-cookie-consent in your Angular project. You have to import `NgxGdprCookieConsentModule.forRoot()` in the root NgModule of your application.
-
-The forRoot static method is a convention that provides and configures services at the same time. Make sure you only call this method in the root module of your application, most of the time called AppModule. This method allows you to configure the NgxGdprCookieConsentModule by specifying different cookie types.
-
-Here is an example how to configure 2 different cookie definitions:
+In Angular 18+ projects with **standalone APIs**, you no longer need an `AppModule`.
+Instead, configure the consent service directly in your `app.config.ts`:
 
 ```typescript
-import {NgModule} from '@angular/core';
-import {NgxGdprCookieConsentModule} from '@ngx-gdpr-cookie-consent';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// app.config.ts
 
-@NgModule({
-    imports: [
-        BrowserAnimationsModule,
-        NgxGdprCookieConsentModule.forRoot({
-          cookieTypes: [
-            {
-              id: 'essential',
-              name: 'Essential cookies',
-              description: 'Essential cookies are required in order to guarantee app stability',
-              disabled: true,
-              selected: true
-            },
-            {
-              id: 'external',
-              name: 'External Services',
-              description: 'External services help us to delivery customer experience',
-              scripts: [
-                'https://maps.googleapis.com/maps/api/js?libraries=places&key=mymapskey'
-              ]
-            }
-          ]
-      })
-    ],
-    bootstrap: [AppComponent]
-})
-export class AppModule { }
+import { ApplicationConfig } from '@angular/core';
+import { provideNgxGdprCookieConsent } from 'ngx-gdpr-cookie-consent';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNgxGdprCookieConsent({
+      cookieTypes: [
+        {
+          id: 'essential',
+          name: 'Essential cookies',
+          description: 'Essential cookies are required in order to guarantee app stability',
+          disabled: true,
+          selected: true
+        },
+        {
+          id: 'external',
+          name: 'External Services',
+          description: 'External services help us to deliver customer experience'
+        }
+      ]
+    })
+  ]
+};
 ```
 
-2. Add the cookie consent component to your `app.component.ts`:
+In your standalone `AppComponent`, simply import and use the consent components:
 
+```typescript
+import { Component } from '@angular/core';
+import { NgxGdprCookieConsent, NgxGdprCookieContainer } from 'ngx-gdpr-cookie-consent';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [NgxGdprCookieConsent, NgxGdprCookieContainer],
+  template: `
+    <cookie-consent [config]="config"></cookie-consent>
+
+    <cookie-container cookieId="external">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0" allowfullscreen></iframe>
+    </cookie-container>
+  `
+})
+export class AppComponent {
+  config = {
+    image: 'assets/images/cookie.png',
+    legalLinks: [
+      { name: 'TOS', url: '#' }
+    ]
+  };
+}
+```
+
+## Angular 15–17 (NgModule based)
+
+1. Import the `NgxGdprCookieConsentModule` and define all cookie types:
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxGdprCookieConsentModule } from 'ngx-gdpr-cookie-consent';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  imports: [
+    BrowserAnimationsModule,
+    NgxGdprCookieConsentModule.forRoot({
+      cookieTypes: [
+        {
+          id: 'essential',
+          name: 'Essential cookies',
+          description: 'Essential cookies are required in order to guarantee app stability',
+          disabled: true,
+          selected: true
+        },
+        {
+          id: 'external',
+          name: 'External Services',
+          description: 'External services help us to deliver customer experience',
+        }
+      ]
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+2. Use the cookie consent component in your `app.component.html`:
 ```html
 <cookie-consent [config]="config"></cookie-consent>
 ```
 
+3. Define the configuration in your `app.component.ts`:
 ```typescript
-import { Component, ViewChild } from '@angular/core';
-import { NgxGdprCookieConsentConfig } from 'projects/ngx-gdpr-cookie-consent/src/lib/model/common-types';
+import { Component } from '@angular/core';
+import { NgxGdprCookieConsentConfig } from 'ngx-gdpr-cookie-consent';
 
 @Component({
   selector: 'app-root',
@@ -74,14 +127,10 @@ import { NgxGdprCookieConsentConfig } from 'projects/ngx-gdpr-cookie-consent/src
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   config: NgxGdprCookieConsentConfig = {
     image: 'assets/images/cookie.png',
     legalLinks: [
-      {
-        name: 'TOS',
-        url: '#'
-      }
+      { name: 'TOS', url: '#' }
     ]
   };
 }

@@ -2,13 +2,13 @@
   "name": "ngx-gdpr-cookie-consent",
   "author": {
     "name": "Simon Kobler",
-    "email": "simon@kobler.me"
+    "email": "github@kobler.me"
   },
-  "version": "19.0.0",
+  "version": "20.0.0",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0 ",
-    "ngx-cookie-service": "^19.0.0"
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0 ",
+    "ngx-cookie-service": "^20.0.0"
   },
   "publishConfig": {
     "access": "public"

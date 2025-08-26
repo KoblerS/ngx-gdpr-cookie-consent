@@ -1,93 +1,114 @@
-<div class="modal-container" *ngIf="isModalShown" [@opacityAnim]>
-  <div class="modal-popup" [@fadeAnim] *ngIf="!isModalHiding">
-    <div class="inner-content" role="landmark" [class.inner-individual]="!showMainPage" [class.isAnimating]="isAnimating">
-      <div class="main-content" *ngIf="showMainPage">
-        <div class="clearfix">
-          <img [src]="config.image" *ngIf="config.image" class="float-left mr-2" />
-          <h1 class="float-left ml-1">{{ config.title ?? defaultValues.title }}</h1>
-        </div>
-
-        <p class="mt-3">{{ config.subtitle ?? defaultValues.subtitle }}</p>
-
-        <div *ngIf="group">
-          <form [formGroup]="group">
-            <div class="clearfix mt-4">
-              <div class="float-left mr-3 cookie-type" *ngFor="let type of providerConfig.cookieTypes">
-                <input type="checkbox" class="mr-2" [formControlName]="type.id" />
-                <label text-uppercase>{{ type.name }}</label>
+@if (isModalShown) {
+  <div class="modal-container" [@opacityAnim]>
+    @if (!isModalHiding) {
+      <div class="modal-popup" [@fadeAnim]>
+        <div class="inner-content" role="landmark" [class.inner-individual]="!showMainPage"
+          [class.isAnimating]="isAnimating">
+          @if (showMainPage) {
+            <div class="main-content">
+              <div class="clearfix">
+                @if (config.image) {
+                  <img [src]="config.image" class="float-left mr-2" />
+                }
+                <h1 class="float-left ml-1">{{ config.title ?? defaultValues.title }}</h1>
               </div>
-            </div>
-          </form>
-        </div>
-
-        <button class="mt-4 button-full-width" (click)="acceptAll()">
-          {{ config.confirmAllButtonText ?? defaultValues.confirmAllButtonText }}
-        </button>
-
-        <button class="mt-3 secondary-button button-full-width" (click)="saveSelection()">
-          {{ config.confirmButtonText ?? defaultValues.confirmButtonText }}
-        </button>
-
-        <div class="text-center mt-2">
-          <a color="primary" class="individual-settings-button" (click)="toggleView()">{{
-            config.individualPrivacySettingsButtonText ?? defaultValues.individualPrivacySettingsButtonText }}</a>
-        </div>
-
-        <div class="position-inline text-center mt-3 legal-statements pb-2" *ngIf="config.legalLinks">
-          <div *ngFor="let statement of config.legalLinks; let i = index">
-            <a [href]="statement.url" target="_blank">{{ statement.name }}</a> <span
-            *ngIf="(i+1) < config.legalLinks.length">|</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="individual-settings-content" *ngIf="showIndividualPage">
-        <div class="pure-g">
-          <div class="pure-u-1-5">
-            <img [src]="config.image" *ngIf="config.image" class="float-left" />
-          </div>
-          <div class="pure-u-4-5 mb-3">
-            <h1 class="ml-1">{{ config.title }}</h1>
-            <p class="mt-2 ml-3">{{ config.individualPrivacySettingsSubtitle ??
-              defaultValues.individualPrivacySettingsSubtitle }}</p>
-
-            <div class="clearfix">
-              <button class="float-left button-sm mr-3" (click)="acceptAll()">
+              <p class="mt-3">{{ config.subtitle ?? defaultValues.subtitle }}</p>
+              @if (group) {
+                <div>
+                  <form [formGroup]="group">
+                    <div class="clearfix mt-4">
+                      @for (type of providerConfig.cookieTypes; track type) {
+                        <div class="float-left mr-3 cookie-type">
+                          <input type="checkbox" class="mr-2" [formControlName]="type.id" />
+                          <label text-uppercase>{{ type.name }}</label>
+                        </div>
+                      }
+                    </div>
+                  </form>
+                </div>
+              }
+              <button class="mt-4 button-full-width" (click)="acceptAll()">
                 {{ config.confirmAllButtonText ?? defaultValues.confirmAllButtonText }}
               </button>
-
-              <button class="float-left secondary-button button-sm" (click)="saveSelection()">
+              <button class="mt-3 secondary-button button-full-width" (click)="saveSelection()">
                 {{ config.confirmButtonText ?? defaultValues.confirmButtonText }}
               </button>
-
-              <a class="float-right back-button mr-3" (click)="toggleView()">
-                {{ config.backButtonText ?? defaultValues.backButtonText }}
-              </a>
-            </div>
-          </div>
-
-          <div class="pure-u-1-1" *ngFor="let type of providerConfig.cookieTypes">
-            <div class="cookie-box">
-              <div class="clearfix mb-3">
-                <h3 class="float-left">{{ type.name }}</h3>
-                <label class="switch float-right" *ngIf="!type.disabled">
-                  <input type="checkbox" (change)="toggleItem($event, type)"
-                    [checked]="group.get(type.id)?.value ?? false">
-                  <span class="slider round"></span>
-                </label>
+              <div class="text-center mt-2">
+                <a color="primary" class="individual-settings-button" (click)="toggleView()">{{
+                config.individualPrivacySettingsButtonText ?? defaultValues.individualPrivacySettingsButtonText }}</a>
               </div>
-              <p>{{ type.description }}</p>
+              @if (config.legalLinks) {
+                <div class="position-inline text-center mt-3 legal-statements pb-2">
+                  @for (statement of config.legalLinks; track statement; let i = $index) {
+                    <div>
+                      <a [href]="statement.url" target="_blank">{{ statement.name }}</a> @if ((i+1) < config.legalLinks.length) {
+                      <span
+                      >|</span>
+                    }
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+        @if (showIndividualPage) {
+          <div class="individual-settings-content">
+            <div class="pure-g">
+              <div class="pure-u-1-5">
+                @if (config.image) {
+                  <img [src]="config.image" class="float-left" />
+                }
+              </div>
+              <div class="pure-u-4-5 mb-3">
+                <h1 class="ml-1">{{ config.title }}</h1>
+                <p class="mt-2 ml-3">{{ config.individualPrivacySettingsSubtitle ??
+                defaultValues.individualPrivacySettingsSubtitle }}</p>
+                <div class="clearfix">
+                  <button class="float-left button-sm mr-3" (click)="acceptAll()">
+                    {{ config.confirmAllButtonText ?? defaultValues.confirmAllButtonText }}
+                  </button>
+                  <button class="float-left secondary-button button-sm" (click)="saveSelection()">
+                    {{ config.confirmButtonText ?? defaultValues.confirmButtonText }}
+                  </button>
+                  <a class="float-right back-button mr-3" (click)="toggleView()">
+                    {{ config.backButtonText ?? defaultValues.backButtonText }}
+                  </a>
+                </div>
+              </div>
+              @for (type of providerConfig.cookieTypes; track type) {
+                <div class="pure-u-1-1">
+                  <div class="cookie-box">
+                    <div class="clearfix mb-3">
+                      <h3 class="float-left">{{ type.name }}</h3>
+                      @if (!type.disabled) {
+                        <label class="switch float-right">
+                          <input type="checkbox" (change)="toggleItem($event, type)"
+                            [checked]="group.get(type.id)?.value ?? false">
+                          <span class="slider round"></span>
+                        </label>
+                      }
+                    </div>
+                    <p>{{ type.description }}</p>
+                  </div>
+                </div>
+              }
             </div>
-          </div>
+            @if (config.legalLinks) {
+              <div class="position-inline text-right mt-3 legal-statements pb-2">
+                @for (statement of config.legalLinks; track statement; let i = $index) {
+                  <div>
+                    <a [href]="statement.url" target="_blank">{{ statement.name }}</a> @if ((i+1) < config.legalLinks.length) {
+                    <span
+                    >|</span>
+                  }
+                </div>
+              }
+            </div>
+          }
         </div>
-
-        <div class="position-inline text-right mt-3 legal-statements pb-2" *ngIf="config.legalLinks">
-          <div *ngFor="let statement of config.legalLinks; let i = index">
-            <a [href]="statement.url" target="_blank">{{ statement.name }}</a> <span
-              *ngIf="(i+1) < config.legalLinks.length">|</span>
-          </div>
-        </div>
-      </div>
+      }
     </div>
   </div>
+}
 </div>
+}
