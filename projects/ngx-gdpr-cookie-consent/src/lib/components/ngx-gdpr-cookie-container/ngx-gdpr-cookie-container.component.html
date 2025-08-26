@@ -1,13 +1,17 @@
 <div class="consent-container">
-  <div class="inner-consent-container" *ngIf="!consented || showLoader" [@opacityAnim]>
-    <div class="consent-banner">
-      <p>{{ consentMessage }}</p>
-      <button (click)="triggerModal()">{{ buttonMessage }}</button>
+  @if (!consented || showLoader) {
+    <div class="inner-consent-container" [@opacityAnim]>
+      <div class="consent-banner">
+        <p>{{ consentMessage }}</p>
+        <button (click)="triggerModal()">{{ buttonMessage }}</button>
+      </div>
     </div>
-  </div>
+  }
 
-  <div *ngIf="consented && !showLoader">
-    <div [innerHTML]="innerHTML"></div>
-    <ng-content></ng-content>
-  </div>
+  @if (consented && !showLoader) {
+    <div>
+      <div [innerHTML]="innerHTML"></div>
+      <ng-content></ng-content>
+    </div>
+  }
 </div>

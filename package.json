@@ -1,6 +1,6 @@
 {
   "name": "ngx-gdpr-cookie-consent",
-  "version": "19.0.0",
+  "version": "20.0.0",
   "scripts": {
     "start": "ng serve",
     "build:ci": "ng build ngx-gdpr-cookie-consent --configuration production",
@@ -28,15 +28,15 @@
     "@angular/compiler-cli": "^20.2.1",
     "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~5.1.4",
-    "jasmine-core": "~5.1.2",
+    "jasmine-core": "~5.9.0",
     "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.2.0",
-    "ngx-cookie-service": "19.1.2",
+    "ngx-cookie-service": "20.1.0",
     "purecss": "^3.0.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.2"
   }
 }

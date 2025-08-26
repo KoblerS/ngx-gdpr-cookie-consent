@@ -1,28 +1,33 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, animation } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 import { NgxGdprCookieConsentService } from '../../service';
+import { CommonModule } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @Component({
-    selector: 'cookie-container',
-    templateUrl: './ngx-gdpr-cookie-container.component.html',
-    styleUrls: ['./ngx-gdpr-cookie-container.component.scss'],
-    animations: [
-        trigger('opacityAnim', [
-            state('in', style({ opacity: 1 })),
-            transition('void => *', [
-                style({ opacity: 0 }),
-                animate(500)
-            ]),
-            transition('* => void', [
-                animate(500, style({ opacity: 0 }))
-            ])
-        ])
-    ],
-    standalone: false
+  selector: 'cookie-container',
+  templateUrl: './ngx-gdpr-cookie-container.component.html',
+  styleUrls: ['./ngx-gdpr-cookie-container.component.scss'],
+  animations: [
+    trigger('opacityAnim', [
+      state('in', style({ opacity: 1 })),
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(500)
+      ]),
+      transition('* => void', [
+        animate(500, style({ opacity: 0 }))
+      ])
+    ])
+  ],
+  standalone: true,
+  imports: [
+    CommonModule
+  ]
 })
-export class NgxGdprCookieContainerComponent implements OnInit {
+export class NgxGdprCookieContainer implements OnInit {
 
   @Input()
   cookieId!: string;
@@ -42,7 +47,7 @@ export class NgxGdprCookieContainerComponent implements OnInit {
   protected innerHTML: any = null;
 
   protected showLoader = true;
-  
+
   @Output()
   didLoaded: EventEmitter<void> = new EventEmitter<void>(undefined);
 
@@ -51,12 +56,12 @@ export class NgxGdprCookieContainerComponent implements OnInit {
   constructor(private _service: NgxGdprCookieConsentService,
     private _sanitizer: DomSanitizer) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     if (this.waitForScripts) {
       this.showLoader = true;
       this._service.scriptsLoaded.pipe(
         take(1)
-      ).subscribe(() => {        
+      ).subscribe(() => {
         this.consented = this._service.hasConsent(this.cookieId);
         this._service.selectionState.subscribe(state => {
           this.consented = this._service.hasConsent(this.cookieId);

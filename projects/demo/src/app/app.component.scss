@@ -4,7 +4,7 @@ h2 {
 }
 
 button {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -14,4 +14,9 @@ button {
   font-size: 16px;
   cursor: pointer;
   border-radius: 6px;
+}
+
+.map-container {
+  width: 800px;
+  height: 300px;
 }
