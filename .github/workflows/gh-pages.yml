@@ -3,32 +3,35 @@ name: GitHub Pages
 on:
   push:
     branches:
-    - main
+      - main
+  # Required as GitHub pages have TTL of
+  schedule:
+    - cron: "0 0 * * 0" # Every Sunday at midnight
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build:ci
+      - name: Build
+        run: npm run build:ci
 
-    - name: Build
-      run: npm run build:demo
+      - name: Build
+        run: npm run build:demo
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist/demo
-        enable_jekyll: false
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/demo/browser
+          enable_jekyll: false
